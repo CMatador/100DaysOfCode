@@ -1,4 +1,4 @@
-# Choose your own adventure
+# Day 3 - Choose your own adventure
 
 print('''
 *******************************************************************************

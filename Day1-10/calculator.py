@@ -1,6 +1,6 @@
 # Day 10 - Calculator
 
-from day10art import logo
+from calculator_art import logo
 
 # Calculator
 

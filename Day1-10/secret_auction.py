@@ -1,6 +1,6 @@
 # Day 9 - Secret Auction
 
-from day9art import logo
+from auction_art import logo
 from replit import clear
 
 print(logo)
