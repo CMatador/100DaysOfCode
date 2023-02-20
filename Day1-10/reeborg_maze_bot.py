@@ -6,6 +6,7 @@ def turn_right():
     turn_left()
     turn_left()
 
+
 # to prevent cases where the robot circles around indefinitely
 while front_is_clear():
     move()

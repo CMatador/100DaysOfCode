@@ -1,4 +1,5 @@
 # Day 2 - Tip Calculator
+
 print('Welcome to the tip calculator.')
 bill = input('What was the total bill? $')
 tip = int(input('What percentage tip would you like to give? ')) / 100

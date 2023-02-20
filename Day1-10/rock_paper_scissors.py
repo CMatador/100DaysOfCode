@@ -1,5 +1,7 @@
 # Day 4 - Rock, Paper, Scissors Game
 
+import random
+
 rock = '''
     _______
 ---'   ____)
@@ -27,13 +29,13 @@ scissors = '''
 ---.__(___)
 '''
 
-#Write your code below this line 👇
+# Write your code below this line 👇
 
-import random
 
 # Gathers players choice by input and computer's choice by random
-player_choice = int(input('What do you choose? Type 0 for Rock, 1 for Paper, or 2 for Scissors.\n'))
-computer_choice = random.randint(0,2)
+player_choice = int(input('What do you choose? Type 0 for Rock, 1 for Paper,\
+                          or 2 for Scissors.\n'))
+computer_choice = random.randint(0, 2)
 
 # Game Logic
 if player_choice == 0:

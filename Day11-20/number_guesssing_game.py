@@ -35,7 +35,7 @@ while not correct and attempts > 0:
         print('Too low.')
         attempts -= 1
 
-    if correct == False and attempts > 0:
+    if correct is False and attempts > 0:
         print('Guess again.')
 
 # Game end running out of attempts

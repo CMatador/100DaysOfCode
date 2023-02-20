@@ -31,7 +31,7 @@ while '_' in display and lives > 0:
     else:
         print(f'Sorry, {guess} is not in the word.')
         lives -= 1
-        
+
     print(display)
     print(stages[lives])
     guesses.append(guess)

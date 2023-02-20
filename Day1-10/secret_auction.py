@@ -21,4 +21,5 @@ while not finished:
         clear()
 
 highest_bidder = max(auction_bids, key=auction_bids.get)
-print(f'The winner is {highest_bidder} with a bid of ${auction_bids[highest_bidder]}.')
+print(f'The winner is {highest_bidder} with a bid of \
+      ${auction_bids[highest_bidder]}.')
