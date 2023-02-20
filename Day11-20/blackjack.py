@@ -100,6 +100,8 @@ while play_game:
             if add_card == 'y':
                 deal_card(player_hand)
                 display_hand()
+                if 11 in player_hand and sum(player_hand) > 21:
+                    player_hand[player_hand.index(11)] = 1
                 if sum(player_hand) > 21:
                     final_reveal()
                     print('You went over. You lose :\'(')
