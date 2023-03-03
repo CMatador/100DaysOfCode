@@ -29,7 +29,6 @@ turtle.shape(image)
 
 state_df = pd.read_csv('Day21-30/US_States_Game/50_states.csv')
 correct = []
-states_to_learn = []
 
 while len(correct) < 50:
     screen.update()
@@ -45,9 +44,10 @@ while len(correct) < 50:
         if answer_state not in correct:
             correct.append(answer_state)
 
-for state in state_df['state'].values:
-    if state not in correct:
-        states_to_learn.append(state)
+# Refactored with list comprehension
+states_to_learn = [
+    state for state in state_df['state'].values if state not in correct
+    ]
 
 learn_list = pd.DataFrame(states_to_learn)
 learn_list.to_csv('Day21-30/US_States_Game/states_to_learn.csv')
