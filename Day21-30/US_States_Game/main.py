@@ -40,9 +40,9 @@ while len(correct) < 50:
     if answer_state == 'Exit':
         break
     if answer_state.title() in state_df['state'].values:
-        add_to_map()
         if answer_state not in correct:
             correct.append(answer_state)
+            add_to_map()
 
 # Refactored with list comprehension
 states_to_learn = [
