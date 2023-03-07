@@ -4,6 +4,8 @@ from tkinter import Tk, Canvas, PhotoImage, Label, Entry, Button, END
 from tkinter import messagebox
 from random import randint, shuffle, choice
 import pyperclip
+import json
+PATH = 'Day21-30/Password_Manager/'
 
 
 # ---------------------------- PASSWORD GENERATOR -------------------------- #
@@ -33,6 +35,18 @@ def generate_password():
 
 
 def save():
+
+    website = site_entry.get()
+    user = user_entry.get()
+    password = pass_entry.get()
+
+    new_data = {
+        website: {
+            'username': user,
+            'password': password,
+        }
+    }
+
     if len(site_entry.get()) == 0 or len(user_entry.get()) == 0 \
             or len(pass_entry.get()) == 0:
         messagebox.showerror(
@@ -40,21 +54,49 @@ def save():
             message="Please don't leave any fields empty."
         )
         return
+    else:
+        try:
+            with open(PATH+'data.json', mode='r') as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open(PATH+'data.json', mode='w') as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            data.update(new_data)
+            with open(PATH+'data.json', mode='w') as data_file:
+                json.dump(data, data_file, indent=4)
+        finally:
+            site_entry.delete(0, END)
+            pass_entry.delete(0, END)
 
-    is_ok = messagebox.askokcancel(
-        title=site_entry.get(),
-        message=f'These are the details entered: \nEmail: {user_entry.get()} '
-        f'\nPassword: {pass_entry.get()} \nIs it ok to save?'
-    )
 
-    if is_ok:
-        with open('Day21-30/Password_Manager/data.txt', mode='a') as data:
-            data.write(
-                f'{site_entry.get()} | {user_entry.get()} | '
-                f'{pass_entry.get()}\n'
+# ------------------------PASSWORD RETRIEVAL--------------------------- #
+
+def find_password():
+    website = site_entry.get()
+
+    try:
+        with open(PATH+'data.json') as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        messagebox.showerror(
+            title='Error',
+            message='No Data File Found.'
+        )
+    else:
+        if website in data:
+            username = data[website]["username"]
+            password = data[website]["password"]
+            messagebox.showinfo(
+                title=website,
+                message=f'Username: {username}\n'
+                f'Password: {password}'
             )
-    site_entry.delete(0, END)
-    pass_entry.delete(0, END)
+        else:
+            messagebox.showerror(
+                title='Error',
+                message=f'No details for {website} exists.'
+            )
 
 
 # ---------------------------- UI SETUP ------------------------------- #
@@ -80,10 +122,17 @@ site_label = Label(
 site_label.grid(row=1, column=0)
 
 site_entry = Entry(
-    width=52
+    width=33
 )
 site_entry.focus()
-site_entry.grid(row=1, column=1, columnspan=2)
+site_entry.grid(row=1, column=1)
+
+search_button = Button(
+    text='Search',
+    width=15,
+    command=find_password
+)
+search_button.grid(row=1, column=2)
 
 user_label = Label(
     text='Email/Username:'
